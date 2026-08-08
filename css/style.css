@@ -481,8 +481,8 @@ section {
 }
 
 .gallery-grid > div {
-  flex: 0 1 calc(25% - 1.5rem);
-  min-width: 220px;
+  flex: 0 1 calc(33.333% - 1.5rem);
+  min-width: 250px;
 }
 
 .gallery-card {
