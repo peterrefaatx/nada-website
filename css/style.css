@@ -594,28 +594,29 @@ section {
 .envelope-wrapper::before {
   content: '';
   position: absolute;
-  top: -144px;
+  top: 0;
   left: 0;
   width: 0;
   height: 0;
   border-left: 190px solid transparent;
   border-right: 190px solid transparent;
-  border-bottom: 144px solid #FFB7B2;
-  transform-origin: bottom;
-  transition: transform 0.5s ease 0.15s;
-  z-index: 3;
+  border-top: 130px solid #FFB7B2;
+  transform-origin: top;
+  transition: transform 0.4s ease 0.3s, z-index 0s linear 0.3s;
+  z-index: 5;
 }
 
 .envelope-wrapper.open::before {
-  transform: rotateX(180deg) translateY(144px);
+  transform: rotateX(180deg);
   z-index: 1;
-  border-bottom-color: #FFA49E;
+  transition: transform 0.4s ease 0s, z-index 0s linear 0.2s;
+  border-top-color: #FFA49E;
 }
 
 /* Wax seal */
 .wax-seal {
   position: absolute;
-  top: -18px;
+  top: 112px;
   left: 50%;
   transform: translateX(-50%);
   width: 36px;
@@ -672,7 +673,7 @@ section {
 
 .letter {
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 18px;
   width: 344px;
   height: 210px;
@@ -680,7 +681,7 @@ section {
   padding: 2rem 1.8rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  transition: transform 0.5s ease, height 0.5s ease;
+  transition: transform 0.5s ease 0s, height 0.5s ease 0s;
   z-index: 2;
   overflow: hidden;
   text-align: left;
@@ -692,6 +693,7 @@ section {
   z-index: 6;
   box-shadow: 0 20px 48px rgba(74, 44, 61, 0.2);
   overflow-y: auto;
+  transition: transform 0.5s ease 0.3s, height 0.5s ease 0.3s;
 }
 
 .letter-title {
@@ -1080,12 +1082,17 @@ footer p {
   .envelope-wrapper::before {
     border-left-width: 150px;
     border-right-width: 150px;
-    border-bottom-width: 114px;
-    top: -114px;
+    border-top-width: 100px;
+    border-bottom-width: 0;
+    top: 0;
   }
 
   .envelope-wrapper.open::before {
-    transform: rotateX(180deg) translateY(114px);
+    transform: rotateX(180deg);
+  }
+
+  .wax-seal {
+    top: 82px;
   }
 
   .envelope-sides::before {
@@ -1108,7 +1115,7 @@ footer p {
 
   .envelope-wrapper.open .letter {
     transform: translateY(-200px);
-    height: 380px;
+    height: 360px;
   }
 
   .game-area { height: 450px; }
