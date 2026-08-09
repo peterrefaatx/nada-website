@@ -7,12 +7,25 @@
   <meta name="description" content="A birthday celebration for the most beautiful soul — Nada turns 28.">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="intro-active">
 
   <!-- Background Music -->
   <audio id="bg-music" loop preload="auto">
     <source src="music for site.mp3" type="audio/mpeg">
   </audio>
+
+  <!-- Intro Overlay -->
+  <div id="intro-overlay" class="intro-overlay">
+    <div class="intro-content">
+      <div class="intro-heart">💝</div>
+      <h1 class="intro-title">A Surprise for <span>Nada</span></h1>
+      <div class="intro-desc">
+        <p>Turn on your volume for a little magic, and step inside.</p>
+        <span>(Tap to begin)</span>
+      </div>
+      <button id="enter-btn" class="intro-btn">Enter Celebration ✦</button>
+    </div>
+  </div>
 
   <!-- Particles -->
   <div id="particles-container"></div>
@@ -467,24 +480,38 @@
       });
     }
 
-    // Auto-play background music
+    // Auto-play background music & Intro Overlay
     (function() {
       const music = document.getElementById('bg-music');
+      const intro = document.getElementById('intro-overlay');
+      const enterBtn = document.getElementById('enter-btn');
+      
       if (!music) return;
       music.volume = 0.4;
 
-      function tryPlay() {
-        music.play().catch(() => {
-          // Browser blocked autoplay — play on first user interaction
-          const events = ['click', 'touchstart', 'keydown', 'scroll'];
-          function playOnce() {
-            music.play();
-            events.forEach(e => document.removeEventListener(e, playOnce));
-          }
-          events.forEach(e => document.addEventListener(e, playOnce, { once: true }));
+      function startCelebration() {
+        // Play music
+        music.play().catch(err => console.log("Audio play failed: ", err));
+        
+        // Remove overlay
+        if (intro) {
+          intro.classList.add('fade-out');
+          document.body.classList.remove('intro-active');
+          setTimeout(() => {
+            intro.remove();
+          }, 800); // matches CSS transition duration
+        }
+      }
+
+      if (enterBtn) {
+        enterBtn.addEventListener('click', startCelebration);
+      }
+      if (intro) {
+        // Fallback: clicking background also starts it
+        intro.addEventListener('click', (e) => {
+          if (e.target === intro) startCelebration();
         });
       }
-      tryPlay();
     })();
   </script>
 </body>
